@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-
+import React, { useEffect, useState } from "react";
 import { BiMinus, BiPlus } from "react-icons/bi";
-import { useStateValue } from "./../context/StateProvider";
-import { actionType } from "./../context/reducer";
+import { motion } from "framer-motion";
+import { useStateValue } from "../context/StateProvider";
+import { actionType } from "../context/reducer";
+import { fetchCart } from "../utils/fetchLocalStorageData";
 let items = [];
 
 const CartItem = ({ item, setFlag, flag }) => {
@@ -13,7 +13,7 @@ const CartItem = ({ item, setFlag, flag }) => {
   const cartDispatch = () => {
     localStorage.setItem("cartItems", JSON.stringify(items));
     dispatch({
-      type: actionType.SET_CART_ITEMS,
+      type: actionType.SET_CART_ITEMSITEMS,
       cartItems: items,
     });
   };
@@ -50,6 +50,7 @@ const CartItem = ({ item, setFlag, flag }) => {
   useEffect(() => {
     items = cartItems;
   }, [qty, items]);
+
   return (
     <div className="w-full p-1 px-2 rounded-lg bg-cartItem flex items-center gap-2">
       <img
